@@ -10,6 +10,10 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
-  await app.listen(8000);
+  //For Azure deployment
+  await app.listen(80);
+
+  //For Localhost development
+  // await app.listen(3000);
 }
 bootstrap();

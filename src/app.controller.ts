@@ -47,8 +47,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    console.log(process.env.AZURE_STORAGE_ACCOUNT);
-    console.log(process.env.AZURE_STORAGE_SAS_KEY);
     return this.appService.getHello();
   }
 }
