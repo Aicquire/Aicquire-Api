@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 import { from, Observable } from 'rxjs';
-import { Employee } from '../models/employee.entity';
-import { EmployeeInterface } from './../models/employee.interface';
+import { Employee } from 'src/models/employee.entity';
+import { EmployeeInterface } from 'src/models/employee.interface';
 
 @Injectable()
 export class EmployeeService {

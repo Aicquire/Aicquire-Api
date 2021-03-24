@@ -45,6 +45,20 @@ export class AppController {
     return file.storageUrl;
   }
 
+  @Post('azure/upload/image')
+  @UseInterceptors(
+    AzureStorageFileInterceptor('file', null, {
+      containerName: 'images',
+    }),
+  )
+  UploadedImagesUsingInterceptor(
+    @UploadedFile()
+    file: UploadedFileMetadata,
+  ) {
+    Logger.log(`Storage URL: ${file.storageUrl}`, 'AppController');
+    return file.storageUrl;
+  }
+
   @Get()
   getHello(): string {
     return this.appService.getHello();

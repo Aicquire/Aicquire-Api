@@ -11,9 +11,10 @@ async function bootstrap() {
     credentials: true,
   });
   //For Azure deployment
-  await app.listen(80);
+  // await app.listen(80);
 
+  app.setGlobalPrefix('api');
   //For Localhost development
-  // await app.listen(3000);
+  await app.listen(3000);
 }
 bootstrap();

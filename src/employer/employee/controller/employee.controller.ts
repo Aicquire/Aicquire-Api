@@ -13,12 +13,12 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { EmployeeService } from '../service/employee.service';
-import { EmployeeInterface } from './../models/employee.interface';
+import { EmployeeInterface } from 'src/models/employee.interface';
 import { JobPositionsService } from './../service/jobpositions/jobpositions.service';
-import { JobPositionsInterface } from './../models/employee.jobpositions.interface';
+import { JobPositionsInterface } from 'src/models/employee.jobpositions.interface';
 import { get } from 'http';
 import { CandidatesService } from '../service/candidates/candidates.service';
-import { CandidateInterface } from './../models/candidate.interface';
+import { CandidateInterface } from 'src/models/candidate.interface';
 
 @Controller('employee')
 export class EmployeeController {

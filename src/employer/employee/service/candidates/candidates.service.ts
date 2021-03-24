@@ -3,10 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 import { from, Observable } from 'rxjs';
-import { JobPositions } from './../../models/employee.jobpositions.entity';
-import { JobPositionsInterface } from './../../models/employee.jobpositions.interface';
-import { Candidate } from '../../models/candidate.entity';
-import { CandidateInterface } from './../../models/candidate.interface';
+import { JobPositions } from 'src/models/employee.jobpositions.entity';
+import { JobPositionsInterface } from 'src/models/employee.jobpositions.interface';
+import { Candidate } from 'src/models/candidate.entity';
+import {
+  CandidateInformation,
+  CandidateInterface,
+} from 'src//models/candidate.interface';
 import * as moment from 'moment';
 
 @Injectable()
@@ -30,6 +33,17 @@ export class CandidatesService {
       v.password = '123';
       v.competencies = [];
       v.access = 0;
+      v.bday = null;
+      v.currencySelected = '';
+      v.address = '';
+      v.experienceLevel = '';
+      v.expectedMonthlySalary = '';
+      v.workExperience = [];
+      v.education = [];
+      v.certificatesAndTrainings = [];
+      v.skillsAndLanguages = [];
+      v.associations = [];
+      v.references = [];
       v.completed = false;
       await this.candidateRepository.save(v);
       console.log(v);

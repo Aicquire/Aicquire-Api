@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { JobseekerService } from './jobseeker.service';
 import { JobseekerController } from './jobseeker.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Candidate } from 'src/employer/employee/models/candidate.entity';
+import { Candidate } from 'src/models/candidate.entity';
 import { AzureStorageModule } from '@nestjs/azure-storage';
 import { ConfigModule } from '@nestjs/config';
 @Module({
