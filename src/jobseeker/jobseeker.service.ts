@@ -22,8 +22,8 @@ export class JobseekerService {
 
   async login(username: any, password: any) {
     const verify = await this.checkIfMatch(username, password);
-    if (verify == 0) return 'Invalid Credentials';
-    else if (verify == 2) return 'Invalid Credentials';
+    if (verify == 0) return 'Username does not exist';
+    else if (verify == 2) return 'Incorrect username or password';
     else {
       return verify;
     }

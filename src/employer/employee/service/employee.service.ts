@@ -20,8 +20,8 @@ export class EmployeeService {
 
   async login(username: any, password: any, company: any) {
     const verify = this.checkIfMatch(username, password, company);
-    if ((await verify) == 0) return 'Invalid Credentials';
-    else if ((await verify) == 2) return 'Invalid Credentials';
+    if ((await verify) == 0) return 'Username does not exist';
+    else if ((await verify) == 2) return 'Incorrect username or password';
     else {
       return true;
     }
