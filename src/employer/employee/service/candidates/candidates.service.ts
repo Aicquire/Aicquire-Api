@@ -44,6 +44,7 @@ export class CandidatesService {
       v.skillsAndLanguages = [];
       v.associations = [];
       v.references = [];
+      v.portfolio = [];
       v.completed = false;
       await this.candidateRepository.save(v);
       console.log(v);
