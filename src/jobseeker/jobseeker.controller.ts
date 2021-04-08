@@ -20,6 +20,7 @@ import {
   CandidateAssociations,
   CandidateReferences,
   CandidateSkillsAndLanguages,
+  CandidatePortfolio,
 } from 'src/models/candidate.interface';
 
 @Controller('jobseeker')
@@ -199,6 +200,19 @@ export class JobseekerController {
   ): Promise<any> {
     return await this.jobseekerService.updateSkillsAndLanguages(v, username);
   }
+
+  // ***********************************************************************
+  // Upload Portfolio
+  // ***********************************************************************
+
+  @Put('/upload-portfolio/:username')
+  async uploadPortfolio(
+    @Param('username') username: string,
+    @Body() portfolio: CandidatePortfolio,
+  ): Promise<any> {
+    return await this.jobseekerService.addPortfolio(portfolio, username);
+  }
+
   // ***********************************************************************
   // Video Response
   // ***********************************************************************

@@ -9,6 +9,7 @@ import {
   CandidateInformation,
   CandidateReferences,
   CandidateSkillsAndLanguages,
+  CandidatePortfolio,
 } from 'src/models/candidate.interface';
 import { CandidateWorkExperience } from 'src/models/candidate.interface';
 import * as randomize from 'randomatic';
@@ -499,6 +500,38 @@ export class JobseekerService {
     } catch (e) {
       return (returnValue = {
         status: 500,
+      });
+    }
+  }
+
+  // ***********************************************************************
+  // Upload Portfolio
+  // ***********************************************************************
+
+  async addPortfolio(portfolio: CandidatePortfolio, username): Promise<any> {
+    portfolio.docRef = randomize('00000');
+    var returnValue;
+    try {
+      await this.candidateRepository.updateOne(
+        { username: username },
+        {
+          $push: {
+            portfolio: portfolio,
+          },
+        },
+        { upsert: true },
+      );
+      var data = await this.getData(username);
+      returnValue = {
+        docRef: portfolio.docRef,
+        status: 200,
+        data,
+      };
+      return returnValue;
+    } catch (e) {
+      return (returnValue = {
+        status: 500,
+        error: e,
       });
     }
   }

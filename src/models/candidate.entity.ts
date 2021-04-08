@@ -6,6 +6,7 @@ import {
   CandidateReferences,
   CandidateCertificatesAndTrainings,
   CandidateEducation,
+  CandidatePortfolio,
 } from './candidate.interface';
 
 @Entity()
@@ -18,7 +19,7 @@ export class Candidate {
   @Column() password?: string;
   @Column() contactNumber: string;
   @Column() position: string;
-  @Column() emailAddress: string; 
+  @Column() emailAddress: string;
   @Column() currencySelected: string;
   @Column() dateApplied?: string;
   @Column() status?: string;
@@ -39,6 +40,7 @@ export class Candidate {
   @Column() skillsAndLanguages: Array<CandidateSkillsAndLanguages>;
   @Column() associations: Array<CandidateAssociations>;
   @Column() references: Array<CandidateReferences>;
+  @Column() portfolio: Array<CandidatePortfolio>;
 
   constructor(candidate?: Partial<Candidate>) {
     Object.assign(this, candidate);

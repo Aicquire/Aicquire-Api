@@ -30,6 +30,7 @@ export interface CandidateInterface {
   skillsAndLanguages: Array<CandidateSkillsAndLanguages>;
   associations: Array<CandidateAssociations>;
   references: Array<CandidateReferences>;
+  portfolio: Array<CandidatePortfolio>;
 }
 
 export interface CandidateInformation {
@@ -94,5 +95,14 @@ export interface CandidateReferences {
   companyName: string;
   contactNumber: string;
   emailAddress: string;
+  docRef: number;
+}
+
+export interface CandidatePortfolio {
+  name: string;
+  type: string;
+  size: number;
+  details: string;
+  data: string;
   docRef: number;
 }
