@@ -505,7 +505,7 @@ export class JobseekerService {
   }
 
   // ***********************************************************************
-  // Upload Portfolio
+  // Portfolio
   // ***********************************************************************
 
   async addPortfolio(portfolio: CandidatePortfolio, username): Promise<any> {
@@ -524,6 +524,33 @@ export class JobseekerService {
       var data = await this.getData(username);
       returnValue = {
         docRef: portfolio.docRef,
+        status: 200,
+        data,
+      };
+      return returnValue;
+    } catch (e) {
+      return (returnValue = {
+        status: 500,
+        error: e,
+      });
+    }
+  }
+
+  async updatePortfolioDetails(
+    portfolio: CandidatePortfolio,
+    username,
+  ): Promise<any> {
+    var returnValue;
+    try {
+      await this.candidateRepository.updateOne(
+        { username: username, 'portfolio.docRef': portfolio.docRef },
+        {
+          $set: { 'portfolio.$': portfolio },
+        },
+        { upsert: true },
+      );
+      var data = await this.getData(username);
+      returnValue = {
         status: 200,
         data,
       };

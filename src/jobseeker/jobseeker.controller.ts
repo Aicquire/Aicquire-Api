@@ -202,7 +202,7 @@ export class JobseekerController {
   }
 
   // ***********************************************************************
-  // Upload Portfolio
+  // Portfolio
   // ***********************************************************************
 
   @Put('/upload-portfolio/:username')
@@ -211,6 +211,28 @@ export class JobseekerController {
     @Body() portfolio: CandidatePortfolio,
   ): Promise<any> {
     return await this.jobseekerService.addPortfolio(portfolio, username);
+  }
+
+  @Put('/update-portfolio-details/:username')
+  async updatePortfolioDetails(
+    @Param('username') username: string,
+    @Body() portfolio: CandidatePortfolio,
+  ): Promise<any> {
+    return await this.jobseekerService.updatePortfolioDetails(
+      portfolio,
+      username,
+    );
+  }
+
+  @Put('/update-portfolio-details/:username')
+  async deletePortfolioFile(
+    @Param('username') username: string,
+    @Body() portfolio: CandidatePortfolio,
+  ): Promise<any> {
+    return await this.jobseekerService.updatePortfolioDetails(
+      portfolio,
+      username,
+    );
   }
 
   // ***********************************************************************

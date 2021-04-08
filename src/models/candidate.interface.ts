@@ -104,5 +104,6 @@ export interface CandidatePortfolio {
   size: number;
   details: string;
   data: string;
+  isDeleted: boolean;
   docRef: number;
 }
