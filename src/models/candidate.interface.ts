@@ -22,7 +22,7 @@ export interface CandidateInterface {
   position: string;
   avatar: string;
   access: number;
-  videoResponses: Array<any>;
+  videoResponses: Array<CandidateVideoResponse>;
   completed: boolean;
   workExperience: Array<CandidateWorkExperience>;
   education: Array<CandidateEducation>;
@@ -106,4 +106,9 @@ export interface CandidatePortfolio {
   data: string;
   isDeleted: boolean;
   docRef: number;
+}
+
+export interface CandidateVideoResponse {
+  questionNumber: number;
+  videoURL: string;
 }

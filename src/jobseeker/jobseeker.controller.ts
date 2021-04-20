@@ -21,6 +21,7 @@ import {
   CandidateReferences,
   CandidateSkillsAndLanguages,
   CandidatePortfolio,
+  CandidateVideoResponse,
 } from 'src/models/candidate.interface';
 
 @Controller('jobseeker')
@@ -245,6 +246,17 @@ export class JobseekerController {
     @Body('videoResponses') videoResponses: any,
   ): Promise<any> {
     return await this.jobseekerService.addVideoResponse(
+      username,
+      videoResponses,
+    );
+  }
+
+  @Put('/add-one-video-response/:username')
+  async updateOneCompetency(
+    @Param('username') username: string,
+    @Body() videoResponses: CandidateVideoResponse,
+  ): Promise<any> {
+    return await this.jobseekerService.addOneVideoResponse(
       username,
       videoResponses,
     );

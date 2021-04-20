@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "video-temp/{name}",
+      "connection": "AicquireNewContainer"
+    }
+  ],
+  "scriptFile": "../dist/VideoConversionTrigger/index.js"
+}

@@ -577,6 +577,46 @@ export class JobseekerService {
     );
   }
 
+  async addOneVideoResponse(username, videoResponses): Promise<any> {
+    var returnValue;
+    try {
+      // UPDATES ONE ELEMENT
+      var update = await this.candidateRepository.updateOne(
+        {
+          username: username,
+          'videoResponses.questionNumber': videoResponses.questionNumber,
+        },
+        {
+          $set: { 'videoResponses.$': videoResponses },
+        },
+        { upsert: false },
+      );
+      // ADDS ONE ELEMENT
+      if (update.modifiedCount == 0) {
+        await this.candidateRepository.updateOne(
+          {
+            username: username,
+          },
+          {
+            $push: { videoResponses: videoResponses },
+          },
+          { upsert: true },
+        );
+      }
+      var data = await this.getData(username);
+      returnValue = {
+        status: 200,
+        data,
+      };
+      return returnValue;
+    } catch (e) {
+      return (returnValue = {
+        status: 500,
+        error: e,
+      });
+    }
+  }
+
   async checkIfMatch(username: string, password: string) {
     const value = await this.candidateRepository.findOne({
       username: username,

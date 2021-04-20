@@ -59,8 +59,24 @@ export class AppController {
     return file.storageUrl;
   }
 
+  @Post('azure/upload/video-temp')
+  @UseInterceptors(
+    AzureStorageFileInterceptor('file', null, {
+      containerName: 'video-temp',
+    }),
+  )
+  UploadedVideoMp4UsingInterceptor(
+    @UploadedFile()
+    file: UploadedFileMetadata,
+  ) {
+    Logger.log(`Storage URL: ${file.storageUrl}`, 'AppController');
+    return file.storageUrl;
+  }
+
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
+
+  
 }

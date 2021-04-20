@@ -7,6 +7,7 @@ import {
   CandidateCertificatesAndTrainings,
   CandidateEducation,
   CandidatePortfolio,
+  CandidateVideoResponse,
 } from './candidate.interface';
 
 @Entity()
@@ -27,7 +28,7 @@ export class Candidate {
   @Column() positionId: string;
   @Column() avatar: string;
   @Column() access: number;
-  @Column() videoResponses: Array<any>;
+  @Column() videoResponses: Array<CandidateVideoResponse>;
   @Column() completed: boolean;
   @Column() bday: string;
   @Column() address: string;
