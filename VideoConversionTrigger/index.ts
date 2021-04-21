@@ -1,10 +1,10 @@
 import { AzureFunction, Context } from '@azure/functions';
-// import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
+import { BlobServiceClient } from '@azure/storage-blob';
 import * as FormData from 'form-data';
 import fetch from 'node-fetch';
 import axios from 'axios';
 
-const blobTrigger: AzureFunction = async function (
+const blobTrigger: AzureFunction = async function(
   context: Context,
   myBlob: any,
 ): Promise<void> {
@@ -15,10 +15,8 @@ const blobTrigger: AzureFunction = async function (
   //   myBlob.length,
   //   'Bytes',
   // );
-  // context.log(context.bindingData);
   var formData = new FormData();
   formData.append('file', myBlob, context.bindingData.name + '.mp4');
-  // context.log('formData: ', formData);
 
   var apiURL = 'https://aicquire-api.azurewebsites.net/api';
 
@@ -31,17 +29,15 @@ const blobTrigger: AzureFunction = async function (
     method: 'POST',
     body: formData,
   })
-    .then((success) => {
+    .then(success => {
       console.log('recording upload complete.');
-      // this.submitText = 'Video Response Saved';
-      // console.log(success);
       return success.text();
     })
-    .then((data) => {
+    .then(data => {
       console.log('data: ', data);
       videoURL = data;
     })
-    .catch((error) => {
+    .catch(error => {
       console.error('an upload error occurred!');
     });
 
@@ -52,11 +48,23 @@ const blobTrigger: AzureFunction = async function (
 
   await axios
     .put(apiURL + '/jobseeker/add-one-video-response/' + username, files)
-    .then((res) => {
+    .then(res => {
       if (res.status == 200) {
         console.log(res.data);
       }
     });
+
+  const connectionString =
+    'DefaultEndpointsProtocol=https;AccountName=aicquire;AccountKey=nphm2diqytCqnbLNb3HgiZVqnL4dltaw19eAWX4rn766fbo0W03pBh4qMue+pyYICish/zZbjT/74LCwmca2yw==;EndpointSuffix=core.windows.net';
+  const container = 'video-temp';
+  const blob = context.bindingData.name;
+
+  const blobClient = BlobServiceClient.fromConnectionString(connectionString)
+    .getContainerClient(container)
+    .getBlobClient(blob);
+  blobClient.deleteIfExists().then(result => {
+    context.log(result._response.status + ' blob removed');
+  });
 };
 
 export default blobTrigger;

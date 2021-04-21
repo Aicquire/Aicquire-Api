@@ -5,7 +5,7 @@
       "type": "blobTrigger",
       "direction": "in",
       "path": "video-temp/{name}",
-      "connection": "AicquireNewContainer"
+      "connection": "AzureWebJobsStorage"
     }
   ],
   "scriptFile": "../dist/VideoConversionTrigger/index.js"

@@ -567,11 +567,11 @@ export class JobseekerService {
   // Video Response
   // ***********************************************************************
 
-  async addVideoResponse(username, videoResponses): Promise<any> {
+  async completeVideoResponse(username): Promise<any> {
     return await this.candidateRepository.updateOne(
       { username: username },
       {
-        $set: { completed: true, videoResponses: videoResponses },
+        $set: { completed: true },
       },
       { upsert: true },
     );

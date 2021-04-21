@@ -240,15 +240,9 @@ export class JobseekerController {
   // Video Response
   // ***********************************************************************
 
-  @Put('/add-video-response/')
-  async updateCompetency(
-    @Body('username') username: string,
-    @Body('videoResponses') videoResponses: any,
-  ): Promise<any> {
-    return await this.jobseekerService.addVideoResponse(
-      username,
-      videoResponses,
-    );
+  @Put('/complete-video-response/:username')
+  async updateCompetency(@Param('username') username: string): Promise<any> {
+    return await this.jobseekerService.completeVideoResponse(username);
   }
 
   @Put('/add-one-video-response/:username')
