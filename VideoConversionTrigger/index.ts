@@ -8,13 +8,6 @@ const blobTrigger: AzureFunction = async function(
   context: Context,
   myBlob: any,
 ): Promise<void> {
-  // context.log(
-  //   'Blob trigger function processed blob \n Name:',
-  //   context.bindingData.name,
-  //   '\n Blob Size:',
-  //   myBlob.length,
-  //   'Bytes',
-  // );
   var formData = new FormData();
   formData.append('file', myBlob, context.bindingData.name + '.mp4');
 
@@ -30,11 +23,11 @@ const blobTrigger: AzureFunction = async function(
     body: formData,
   })
     .then(success => {
-      console.log('recording upload complete.');
+      console.log('Update Video Complete');
       return success.text();
     })
     .then(data => {
-      console.log('data: ', data);
+      // console.log('data: ', data);
       videoURL = data;
     })
     .catch(error => {
@@ -50,7 +43,7 @@ const blobTrigger: AzureFunction = async function(
     .put(apiURL + '/jobseeker/add-one-video-response/' + username, files)
     .then(res => {
       if (res.status == 200) {
-        console.log(res.data);
+        console.log('Update Database Complete');
       }
     });
 

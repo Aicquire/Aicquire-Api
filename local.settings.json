@@ -1,8 +1,7 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
-    "AicquireNewContainer": "DefaultEndpointsProtocol=https;AccountName=aicquire;AccountKey=nphm2diqytCqnbLNb3HgiZVqnL4dltaw19eAWX4rn766fbo0W03pBh4qMue+pyYICish/zZbjT/74LCwmca2yw==;EndpointSuffix=core.windows.net"
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=aicquire;AccountKey=nphm2diqytCqnbLNb3HgiZVqnL4dltaw19eAWX4rn766fbo0W03pBh4qMue+pyYICish/zZbjT/74LCwmca2yw==",
+    "FUNCTIONS_WORKER_RUNTIME": "node"
   }
 }

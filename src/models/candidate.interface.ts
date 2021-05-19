@@ -111,4 +111,7 @@ export interface CandidatePortfolio {
 export interface CandidateVideoResponse {
   questionNumber: number;
   videoURL: string;
+  sentiments: Array<any>;
+  emotions: Array<any>;
+  transcript: string;
 }
