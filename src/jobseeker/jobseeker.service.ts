@@ -577,7 +577,7 @@ export class JobseekerService {
     );
   }
 
-  async addOneVideoResponse(username, videoResponses): Promise<any> {
+  async addVideoResponse(username, videoResponses): Promise<any> {
     var returnValue;
     try {
       // UPDATES ONE ELEMENT
@@ -600,7 +600,7 @@ export class JobseekerService {
           {
             $push: { videoResponses: videoResponses },
           },
-          { upsert: true },
+          { upsert: false },
         );
       }
       var data = await this.getData(username);

@@ -4,7 +4,7 @@ import * as FormData from 'form-data';
 import fetch from 'node-fetch';
 import axios from 'axios';
 
-const blobTrigger: AzureFunction = async function(
+const blobTrigger: AzureFunction = async function (
   context: Context,
   myBlob: any,
 ): Promise<void> {
@@ -22,15 +22,15 @@ const blobTrigger: AzureFunction = async function(
     method: 'POST',
     body: formData,
   })
-    .then(success => {
+    .then((success) => {
       console.log('Update Video Complete');
       return success.text();
     })
-    .then(data => {
+    .then((data) => {
       // console.log('data: ', data);
       videoURL = data;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('an upload error occurred!');
     });
 
@@ -40,8 +40,8 @@ const blobTrigger: AzureFunction = async function(
   };
 
   await axios
-    .put(apiURL + '/jobseeker/add-one-video-response/' + username, files)
-    .then(res => {
+    .put(apiURL + '/jobseeker/add-video-response/' + username, files)
+    .then((res) => {
       if (res.status == 200) {
         console.log('Update Database Complete');
       }
@@ -55,7 +55,7 @@ const blobTrigger: AzureFunction = async function(
   const blobClient = BlobServiceClient.fromConnectionString(connectionString)
     .getContainerClient(container)
     .getBlobClient(blob);
-  blobClient.deleteIfExists().then(result => {
+  blobClient.deleteIfExists().then((result) => {
     context.log(result._response.status + ' blob removed');
   });
 };

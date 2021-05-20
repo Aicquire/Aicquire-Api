@@ -245,12 +245,12 @@ export class JobseekerController {
     return await this.jobseekerService.completeVideoResponse(username);
   }
 
-  @Put('/add-one-video-response/:username')
+  @Put('/add-video-response/:username')
   async updateOneCompetency(
     @Param('username') username: string,
     @Body() videoResponses: CandidateVideoResponse,
   ): Promise<any> {
-    return await this.jobseekerService.addOneVideoResponse(
+    return await this.jobseekerService.addVideoResponse(
       username,
       videoResponses,
     );

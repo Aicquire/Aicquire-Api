@@ -1,7 +1,7 @@
 import { AzureFunction, Context } from '@azure/functions';
 import axios from 'axios';
 
-const blobTrigger: AzureFunction = async function(
+const blobTrigger: AzureFunction = async function (
   context: Context,
   myBlob: any,
 ): Promise<void> {
@@ -19,7 +19,7 @@ const blobTrigger: AzureFunction = async function(
 
   context.log('username: ', username);
   context.log('questionNumber: ', questionNumber);
-  await axios.get(context.bindingData.uri).then(res => {
+  await axios.get(context.bindingData.uri).then((res) => {
     {
       insights = res.data.videos[0]?.insights;
       console.log('insights received');
@@ -46,7 +46,7 @@ const blobTrigger: AzureFunction = async function(
   });
   let videoResponses, videoURL;
   console.log('Getting data...');
-  await axios.get(apiURL + '/jobseeker/get-data/' + username).then(res => {
+  await axios.get(apiURL + '/jobseeker/get-data/' + username).then((res) => {
     if (res.status == 200) {
       console.log('Get Data Complete');
       videoResponses = res.data[0].videoResponses;
@@ -56,7 +56,6 @@ const blobTrigger: AzureFunction = async function(
   });
 
   for (let index = 0; index < videoResponses.length; index++) {
-    console.log('index: ', index);
     if (videoResponses[index].questionNumber == questionNumber) {
       console.log('Video URL found at ' + index);
       console.log(videoResponses[index].videoURL);
@@ -76,7 +75,7 @@ const blobTrigger: AzureFunction = async function(
   console.log('Adding video insight...');
   await axios
     .put(apiURL + '/jobseeker/add-video-insight/' + username, videoResponse)
-    .then(res => {
+    .then((res) => {
       if (res.status == 200) {
         console.log('Update Database Complete');
       }
