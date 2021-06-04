@@ -4,7 +4,7 @@ export interface JobPositionsInterface {
   position: string;
   description: string;
   vacant: number;
-  competencies: Array<string>;
+  competencies: Array<any>;
   entries: Array<Questionnaire>;
   id?: ObjectID;
 }

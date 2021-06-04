@@ -18,7 +18,10 @@ import { JobPositionsService } from './../service/jobpositions/jobpositions.serv
 import { JobPositionsInterface } from 'src/models/employee.jobpositions.interface';
 import { get } from 'http';
 import { CandidatesService } from '../service/candidates/candidates.service';
-import { CandidateInterface } from 'src/models/candidate.interface';
+import {
+  CandidateInterface,
+  CandidateCompetency,
+} from 'src/models/candidate.interface';
 
 @Controller('employee')
 export class EmployeeController {
@@ -73,7 +76,6 @@ export class EmployeeController {
   //Employee Candidates Endpoints
   @Post('/add-candidate')
   async addCandidate(@Body() v: CandidateInterface): Promise<any> {
-    console.log(v);
     return await this.candidatesService.addCandidate(v);
   }
 
@@ -92,10 +94,10 @@ export class EmployeeController {
     return await this.candidatesService.getonebyname(v);
   }
 
-  @Put('/update-candidate-competency/')
+  @Put('/update-candidate-competency/:username')
   async updateCompetency(
-    @Body('username') username: string,
-    @Body('competencies') competencies: any,
+    @Param('username') username: string,
+    @Body('competencies') competencies: CandidateCompetency,
   ): Promise<any> {
     return await this.candidatesService.updateCompetencies(
       username,

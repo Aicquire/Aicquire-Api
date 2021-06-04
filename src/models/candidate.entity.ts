@@ -1,5 +1,6 @@
 import { Entity, ObjectID, ObjectIdColumn, Column } from 'typeorm';
 import {
+  CandidateCompetency,
   CandidateWorkExperience,
   CandidateSkillsAndLanguages,
   CandidateAssociations,
@@ -24,7 +25,7 @@ export class Candidate {
   @Column() currencySelected: string;
   @Column() dateApplied?: string;
   @Column() status?: string;
-  @Column() competencies: Array<any>;
+  @Column() competencies: CandidateCompetency;
   @Column() positionId: string;
   @Column() avatar: string;
   @Column() access: number;

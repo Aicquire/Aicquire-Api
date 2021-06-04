@@ -9,6 +9,7 @@ import { Candidate } from 'src/models/candidate.entity';
 import {
   CandidateInformation,
   CandidateInterface,
+  CandidateCompetency,
 } from 'src//models/candidate.interface';
 import * as moment from 'moment';
 
@@ -22,6 +23,10 @@ export class CandidatesService {
   forUsername = moment().format('MM DD YY');
   usernameAdd = this.forUsername.replace(/\s+/g, '');
 
+  async getData(v): Promise<any> {
+    return await this.candidateRepository.find({ username: v });
+  }
+
   async addCandidate(v: CandidateInterface): Promise<any> {
     try {
       let first = v.firstname.substring(0, 2);
@@ -31,7 +36,6 @@ export class CandidatesService {
       v.dateApplied = this.dateToday;
       v.avatar = 'https://cdn.vuetifyjs.com/images/lists/1.jpg';
       v.password = '123';
-      v.competencies = [];
       v.access = 0;
       v.bday = null;
       v.currencySelected = '';
@@ -76,12 +80,27 @@ export class CandidatesService {
   }
 
   async updateCompetencies(username, competencies): Promise<any> {
-    return await this.candidateRepository.updateOne(
-      { username: username },
-      {
-        $set: { competencies: competencies },
-      },
-      { upsert: true },
-    );
+    var returnValue;
+    try{
+      await this.candidateRepository.updateOne(
+        { username: username },
+        {
+          $set: { competencies: competencies },
+        },
+        { upsert: true },
+      );
+      var data = await this.getData(username);
+      console.log("data: ", data)
+      returnValue = {
+        status: 200,
+        data,
+      };
+      return returnValue;
+    }
+    catch (e) {
+      return (returnValue = {
+        status: 500,
+      });
+    }
   }
 }

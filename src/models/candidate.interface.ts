@@ -15,7 +15,7 @@ export interface CandidateInterface {
   emailAddress: string;
   dateApplied: string;
   status?: string;
-  competencies: Array<any>;
+  competencies: CandidateCompetency;
   currencySelected: string;
   positionId: string;
   id?: ObjectID;
@@ -45,6 +45,17 @@ export interface CandidateInformation {
   resumeCategory: string;
   avatar: string;
   currencySelected: string;
+}
+
+export interface CandidateCompetency {
+  average: string;
+  competency: Array<CandidateCompetencies>;
+  remarks: string;
+}
+
+export interface CandidateCompetencies {
+  name: string;
+  score: string;
 }
 
 export interface CandidateWorkExperience {
