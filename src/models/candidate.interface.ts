@@ -125,4 +125,5 @@ export interface CandidateVideoResponse {
   sentiments: Array<any>;
   emotions: Array<any>;
   transcript: string;
+  interviewerNote: string;
 }

@@ -90,7 +90,33 @@ export class CandidatesService {
         { upsert: true },
       );
       var data = await this.getData(username);
-      console.log("data: ", data)
+      returnValue = {
+        status: 200,
+        data,
+      };
+      return returnValue;
+    }
+    catch (e) {
+      return (returnValue = {
+        status: 500,
+      });
+    }
+  }
+
+  async updateVideoResponse(username, videoResponses): Promise<any> {
+    var returnValue;
+    try{
+      await this.candidateRepository.updateOne(
+        {
+          username: username,
+          'videoResponses.questionNumber': videoResponses.questionNumber,
+        },
+        {
+          $set: { 'videoResponses.$': videoResponses },
+        },
+        { upsert: false },
+      );
+      var data = await this.getData(username);
       returnValue = {
         status: 200,
         data,

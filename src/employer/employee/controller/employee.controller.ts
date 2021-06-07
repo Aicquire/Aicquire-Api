@@ -21,6 +21,7 @@ import { CandidatesService } from '../service/candidates/candidates.service';
 import {
   CandidateInterface,
   CandidateCompetency,
+  CandidateVideoResponse,
 } from 'src/models/candidate.interface';
 
 @Controller('employee')
@@ -102,6 +103,17 @@ export class EmployeeController {
     return await this.candidatesService.updateCompetencies(
       username,
       competencies,
+    );
+  }
+
+  @Put('/update-video-response/:username')
+  async updateVideoResponse(
+    @Param('username') username: string,
+    @Body() videoResponses: CandidateVideoResponse,
+  ): Promise<any> {
+    return await this.candidatesService.updateVideoResponse(
+      username,
+      videoResponses,
     );
   }
 }

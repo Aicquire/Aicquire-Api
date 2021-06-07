@@ -617,33 +617,6 @@ export class JobseekerService {
     }
   }
 
-  async addVideoInsights(username, videoResponses): Promise<any> {
-    var returnValue;
-    try {
-      await this.candidateRepository.updateOne(
-        {
-          username: username,
-          'videoResponses.questionNumber': videoResponses.questionNumber,
-        },
-        {
-          $set: { 'videoResponses.$': videoResponses },
-        },
-        { upsert: false },
-      );
-      var data = await this.getData(username);
-      returnValue = {
-        status: 200,
-        data,
-      };
-      return returnValue;
-    } catch (e) {
-      return (returnValue = {
-        status: 500,
-        error: e,
-      });
-    }
-  }
-
   async checkIfMatch(username: string, password: string) {
     const value = await this.candidateRepository.findOne({
       username: username,

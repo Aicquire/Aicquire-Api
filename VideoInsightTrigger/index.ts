@@ -37,10 +37,6 @@ const blobTrigger: AzureFunction = async function (
           console.log('get transcript');
           transcript = getTranscript(insights.transcript);
         }
-
-        // console.log('sentiments: ', sentiments);
-        // console.log('emotions: ', emotions);
-        // console.log('transcript: ', transcript);
       }
     }
   });
@@ -70,11 +66,12 @@ const blobTrigger: AzureFunction = async function (
     sentiments,
     emotions,
     transcript,
+    interviewerNote: '',
   };
 
   console.log('Adding video insight...');
   await axios
-    .put(apiURL + '/jobseeker/add-video-insight/' + username, videoResponse)
+    .put(apiURL + '/jobseeker/add-video-response/' + username, videoResponse)
     .then((res) => {
       if (res.status == 200) {
         console.log('Update Database Complete');

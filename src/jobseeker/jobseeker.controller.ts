@@ -256,17 +256,6 @@ export class JobseekerController {
     );
   }
 
-  @Put('/add-video-insight/:username')
-  async updateVideoInsight(
-    @Param('username') username: string,
-    @Body() videoResponses: CandidateVideoResponse,
-  ): Promise<any> {
-    return await this.jobseekerService.addVideoInsights(
-      username,
-      videoResponses,
-    );
-  }
-
   @Get('/get-data/:username')
   async getUserData(@Param('username') username: string): Promise<any> {
     return await this.jobseekerService.getData(username);
