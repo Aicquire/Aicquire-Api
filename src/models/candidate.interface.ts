@@ -122,6 +122,7 @@ export interface CandidatePortfolio {
 export interface CandidateVideoResponse {
   questionNumber: number;
   videoURL: string;
+  duration: string;
   sentiments: Array<any>;
   emotions: Array<any>;
   transcript: string;

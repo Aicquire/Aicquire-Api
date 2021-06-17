@@ -14,7 +14,8 @@ const blobTrigger: AzureFunction = async function (
   let insights: any,
     transcript: string,
     sentiments = {},
-    emotions: {};
+    emotions = {},
+    duration: string;
   let apiURL = 'https://aicquire-api.azurewebsites.net/api';
 
   context.log('username: ', username);
@@ -25,6 +26,9 @@ const blobTrigger: AzureFunction = async function (
       console.log('insights received');
       if (insights) {
         console.log('get insights');
+        if (insights.duration) {
+          duration = insights.duration;
+        }
         if (insights.sentiments) {
           console.log('get sentiments');
           sentiments = insights.sentiments;
@@ -63,6 +67,7 @@ const blobTrigger: AzureFunction = async function (
   var videoResponse = {
     questionNumber: Number(questionNumber),
     videoURL,
+    duration,
     sentiments,
     emotions,
     transcript,
